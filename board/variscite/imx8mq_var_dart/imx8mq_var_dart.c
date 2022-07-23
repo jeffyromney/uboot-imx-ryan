@@ -180,18 +180,18 @@ static iomux_v3_cfg_t const dart_carrier_detect_pads[] = {
 
 static int var_detect_dart_carrier_rev(void)
 {
-	static int dart_carrier_rev = DART_CARRIER_REV_2;
+	static int dart_carrier_rev = DART_CARRIER_REV_UNDEF;
 
-	// imx_iomux_v3_setup_multiple_pads(dart_carrier_detect_pads,
-	// 			ARRAY_SIZE(dart_carrier_detect_pads));
+	imx_iomux_v3_setup_multiple_pads(dart_carrier_detect_pads,
+				ARRAY_SIZE(dart_carrier_detect_pads));
 
-	// gpio_request(DART_CARRIER_DETECT_GPIO, "dart_carrier_detect");
-	// gpio_direction_input(DART_CARRIER_DETECT_GPIO);
+	gpio_request(DART_CARRIER_DETECT_GPIO, "dart_carrier_detect");
+	gpio_direction_input(DART_CARRIER_DETECT_GPIO);
 
-	// if (gpio_get_value(DART_CARRIER_DETECT_GPIO))
-	// 	dart_carrier_rev = DART_CARRIER_REV_1;
-	// else
-	// 	dart_carrier_rev = DART_CARRIER_REV_2;
+	if (gpio_get_value(DART_CARRIER_DETECT_GPIO))
+		dart_carrier_rev = DART_CARRIER_REV_1;
+	else
+		dart_carrier_rev = DART_CARRIER_REV_2;
 
 	return dart_carrier_rev;
 }
